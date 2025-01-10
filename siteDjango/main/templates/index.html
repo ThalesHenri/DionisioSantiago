@@ -53,7 +53,8 @@
     <section id="contato" class="contato">
         <h2>Entre em Contato</h2>
         <p>Tem dúvidas? Fale conosco!</p>
-        <form action="#" method="POST">
+        <form action="/contato/" method="POST">
+            {% csrf_token %}
             <input type="text" name="nome" placeholder="Seu Nome" required>
             <input type="email" name="email" placeholder="Seu Email" required>
             <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>

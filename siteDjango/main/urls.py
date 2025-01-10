@@ -8,6 +8,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.homePage, name='homePage'),
     path('comprarProduto/<int:produto_id>/', views.comprarProduto, name='comprarProduto'),
+    path('contato/', views.contato, name='contato'),
 ]
 
 if settings.DEBUG:

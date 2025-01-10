@@ -15,7 +15,41 @@
     </div>
     <form method="POST" class="produto-form">
         {% csrf_token %}
-        {{ form.as_p }}
+            <!-- Nome -->
+    <div class="form-group">
+        <label for="id_nome">Nome de Usuário</label>
+        <input type="text" id="id_nome" name="nome" class="form-control" placeholder="Nome de Usuário">
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+        <label for="id_email">Email</label>
+        <input type="email" id="id_email" name="email" class="form-control" placeholder="Email">
+    </div>
+
+    <!-- Telefone -->
+    <div class="form-group">
+        <label for="id_telefone">Telefone</label>
+        <input type="text" id="id_telefone" name="telefone" class="form-control" placeholder="Telefone">
+    </div>
+
+    <!-- Quantidade -->
+    <div class="form-group">
+        <label for="id_quantidade">Quantidade</label>
+        <input type="number" id="id_quantidade" name="quantidade" class="form-control" placeholder="Quantidade">
+    </div>
+
+    <!-- Endereço -->
+    <div class="form-group">
+        <label for="id_endereco">Endereço</label>
+        <textarea id="id_endereco" name="endereco" class="form-control" placeholder="Endereço"></textarea>
+    </div>
+
+    <!-- Observações -->
+    <div class="form-group">
+        <label for="id_observacoes">Observações</label>
+        <textarea id="id_observacoes" name="observacoes" class="form-control" placeholder="Observações"></textarea>
+    </div>
         <button type="submit" class="btn">Finalizar Compra</button>
     </form>
 </section>

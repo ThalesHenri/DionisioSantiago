@@ -169,7 +169,7 @@ header nav .nav-links a:hover {
 /* Estilo para a seção de detalhes do produto */
 .produto-detalhes {
     padding: 40px 20px;
-    background-color: var(--cor-fundo-claro);
+    background-color: #fff;
     color: var(--cor-texto-escuro);
     max-width: 800px;
     margin: 0 auto;
@@ -208,38 +208,75 @@ header nav .nav-links a:hover {
 }
 
 .produto-info p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: var(--cor-texto-secundario);
+    font-size: 25px;
+    text-align: justify;
+    margin-bottom: 20px;
+    color: var(--cor-texto-secundario),;
+    
 }
 
 .produto-info h3 {
-    font-size: 20px;
+    font-size: 40px;
     color: var(--cor-terciaria);
 }
 
 /* Formulário de compra */
+/* Formulário principal */
 .produto-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--cor-fundo-claro);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-.produto-form .btn {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-texto-claro);
-    padding: 15px;
+/* Estilo dos rótulos */
+.produto-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo dos campos de entrada */
+.produto-form input[type="text"],
+.produto-form input[type="email"],
+.produto-form input[type="number"],
+.produto-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efeito de foco nos campos */
+.produto-form input[type="text"]:focus,
+.produto-form input[type="email"]:focus,
+.produto-form input[type="number"]:focus,
+.produto-form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Estilo do botão */
+.produto-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
     font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: var(--cor-terciaria);
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.produto-form .btn:hover {
-    background-color: var(--cor-botao-venda);
+    transition: background-color 0.3s;
 }
 
 /* Sobre */

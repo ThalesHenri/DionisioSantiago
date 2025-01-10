@@ -39,6 +39,11 @@ class CompraForm(forms.Form):
     observacoes = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Observações'}))
     
 
+class ContatoForm(forms.Form):
+    nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Seu Nome'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Seu Email'}))
+    mensagem = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Sua Mensagem'}))
+
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
