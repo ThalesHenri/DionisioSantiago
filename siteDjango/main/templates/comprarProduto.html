@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block HeroBtn %}{% endblock HeroBtn %}
+{% block content %}
+<section id="produto" class="produto-detalhes">
+    <div class="produto-header">
+        <h2>Finalizar a compra : {{ produto.nome }}</h2>
+    </div>
+    <div class="produto-conteudo">
+        <img src="{{ produto.foto.url }}" alt="{{ produto.nome }}" class="produto-imagem">
+        <div class="produto-info">
+            <p>{{ produto.descricao }}</p>
+            <h3>Preço: R$ {{ produto.preco }}</h3>
+            <h3>Unidades Disponíveis : {{ produto.estoque }}</h3>
+        </div>
+    </div>
+    <form method="POST" class="produto-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Finalizar Compra</button>
+    </form>
+</section>
+{% endblock content %}

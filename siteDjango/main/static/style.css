@@ -1,0 +1,347 @@
+/* Definindo as variáveis de cor */
+:root {
+    --cor-primaria: #C29E7A; 
+    --cor-secundaria: #CB742D; 
+    --cor-terciaria: #83481C;
+    --cor-fundo-claro: #FFF8DC; /* Fundo claro */
+    --cor-fundo-escuro: #2F4F4F; /* Fundo escuro */
+    --cor-texto-claro: #ffffff; /* Branco */
+    --cor-texto-escuro: #333333; /* Preto suave */
+    --cor-texto-secundario: #777777; /* Cinza claro */
+    --cor-borda: #ccc; /* Cor de borda */
+    --cor-botao-venda: #4CAF50; /* Verde */
+}
+
+/* Resetando alguns estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
+    color: var(--cor-texto-escuro);
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    padding: 20px 0;
+    text-align: center;
+}
+
+header .logo h1 {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+}
+
+/* Navegação */
+header nav {
+    margin-top: 15px;
+}
+
+header nav .nav-links {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+header nav .nav-links li {
+    margin: 0 15px;
+}
+
+header nav .nav-links a {
+    text-decoration: none;
+    color: var(--cor-texto-claro);
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+header nav .nav-links a:hover {
+    color: var(--cor-secundaria);
+}
+
+/* Seção Hero */
+.hero {
+    background: url("/static/assets/heroBackGround.jpg") no-repeat center center;
+    background-size: cover; /* Ensures the image covers the entire hero section */
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 80px 20px;
+    height: 100vh; /* Adjust height to fill the viewport, or set a specific height like 500px */
+    display: flex; /* Optional: Center content vertically */
+    justify-content: center; /* Optional: Center content horizontally */
+    align-items: center; /* Optional: Center content vertically */
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    position: relative; top: 300px;
+}
+
+.hero .btn:hover {
+    background-color: var(--cor-primaria);
+}
+
+/* Produtos */
+.produtos {
+    padding: 60px 20px;
+    background-color: var(--cor-fundo-claro);
+    text-align: center;
+}
+
+.produtos h2 {
+    font-size: 36px;
+    color: var(--cor-secundaria);
+    margin-bottom: 40px;
+    font-family: 'Georgia', serif;
+}
+.produtos .btn {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+.produtos a{
+    text-decoration: none;
+    font-size: 2rem;
+}
+.produtos .btn:hover{
+    background-color: var(--cor-botao-venda);
+}
+.produto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.produto-item {
+    background-color: var(--cor-texto-claro);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.produto-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.produto-item h3 {
+    font-size: 22px;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 10px;
+}
+
+.produto-item p {
+    font-size: 16px;
+    color: var(--cor-texto-secundario);
+}
+
+/* Estilo para a seção de detalhes do produto */
+.produto-detalhes {
+    padding: 40px 20px;
+    background-color: var(--cor-fundo-claro);
+    color: var(--cor-texto-escuro);
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho do produto */
+.produto-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.produto-header h2 {
+    font-size: 28px;
+    color: var(--cor-secundaria);
+}
+
+/* Conteúdo do produto */
+.produto-conteudo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.produto-imagem {
+    flex: 1 1 40%;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.produto-info {
+    flex: 1 1 50%;
+}
+
+.produto-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--cor-texto-secundario);
+}
+
+.produto-info h3 {
+    font-size: 20px;
+    color: var(--cor-terciaria);
+}
+
+/* Formulário de compra */
+.produto-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.produto-form .btn {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.produto-form .btn:hover {
+    background-color: var(--cor-botao-venda);
+}
+
+/* Sobre */
+.sobre {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.sobre h2 {
+    font-size: 36px;
+    color: var(--cor-secundaria);
+    margin-bottom: 20px;
+}
+
+.sobre p {
+    font-size: 18px;
+    color: var(--cor-texto-secundario);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Contato */
+.contato {
+    padding: 60px 20px;
+    background-color: var(--cor-primaria);
+    text-align: center;
+}
+
+.contato h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--cor-secundaria);
+}
+
+.contato p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: var(--cor-secundaria);
+}
+
+.contato form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-texto-claro);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contato input,
+.contato textarea {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.contato button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contato button:hover {
+    background-color: var(--cor-primaria);
+}
+
+/* Rodapé */
+footer {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .produto-item h3 {
+        font-size: 18px;
+    }
+
+    .produto-item p {
+        font-size: 14px;
+    }
+}
