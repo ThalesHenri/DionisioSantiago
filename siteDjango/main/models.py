@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 
+
 class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name="Email")
     is_admin = models.BooleanField(default=False, verbose_name="Is Admin")
@@ -33,7 +34,7 @@ class Produto(models.Model):
     descricao = models.TextField(blank=True, null=True, verbose_name="Descrição")
     preco = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Preço")
     estoque = models.PositiveIntegerField(verbose_name="Quantidade em Estoque")
-    foto = models.ImageField(upload_to='produtos/', blank=True, null=True, verbose_name="Foto do Produto")
+
 
     def __str__(self):
         return self.nome
@@ -41,6 +42,21 @@ class Produto(models.Model):
     class Meta:
         verbose_name = "Produto"
         verbose_name_plural = "Produtos"
+        
+
+class ProdutoImagem(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name="fotos", verbose_name="Produto")
+    imagem = models.ImageField(upload_to="produtos/", verbose_name="Imagem do Produto")
+
+    def __str__(self):
+        return f"Imagem de {self.produto.nome}"
+    
+    
+        
+
+    class Meta:
+        verbose_name = "Imagem do Produto"
+        verbose_name_plural = "Imagens do Produto"
 
 class Pedido(models.Model):
     STATUS_CHOICES = [

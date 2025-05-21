@@ -20,13 +20,12 @@ class UserForm(forms.ModelForm):
 class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ['nome', 'descricao', 'preco', 'estoque', 'foto']
+        fields = ['nome', 'descricao', 'preco', 'estoque',]
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do Produto'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição'}),
             'preco': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Preço'}),
             'estoque': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Quantidade em Estoque'}),
-            'foto': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
         
 

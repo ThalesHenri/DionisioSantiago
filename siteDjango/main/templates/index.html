@@ -6,10 +6,59 @@
     <title>Dionísio Santiago</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .produto-item {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 1rem;
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
-   <header>
+    <header>
         <nav>
             <ul class="nav-links">
                 <li><a href="{% url "main:homePage" %}">Início</a></li>
@@ -29,16 +78,29 @@
 
     <!-- Produtos -->
     <section id="produtos" class="produtos">
-        {% block content %}<h2>Nossos Produtos</h2>
+        {% block content %}
+        <h2>Nossos Produtos</h2>
         <div class="produto-grid">
             {% for produto in produtos %}
             <div class="produto-item">
-                <img src="{{ produto.foto.url }}" alt="{{ produto.nome }}">
+                <div class="carousel-container" id="carousel-{{ produto.id }}">
+                    <div class="carousel-slide">
+                        {% if produto.fotos.all %}
+                            {% for imagem in produto.fotos.all %}
+                                <img src="{{ imagem.imagem.url }}" alt="{{ produto.nome }}">
+                            {% endfor %}
+                        {% else %}
+                            <img src="{% static 'img/produto_padrao.jpg' %}" alt="Imagem padrão">
+                        {% endif %}
+                    </div>
+                    <button class="carousel-btn prev" onclick="moveSlide({{ produto.id }}, -1)">&#10094;</button>
+                    <button class="carousel-btn next" onclick="moveSlide({{ produto.id }}, 1)">&#10095;</button>
+                </div>
                 <h3>{{ produto.nome }}</h3>
-                <p>{{ produto.descricao }}</p>
+
                 <h3 class="preco">R$ {{ produto.preco }}</h3>
                 <a href="{% url 'main:comprarProduto' produto.id %}"><div class="btn">Comprar</div></a>
-            </div>            
+            </div>
             {% endfor %}
         </div>
     </section>
@@ -46,7 +108,11 @@
     <!-- Sobre -->
     <section id="sobre" class="sobre">
         <h2>Sobre Nós</h2>
-        <p>{{ sobre_texto }}</p>
+        <p>O Dionísio Santiago nasceu de uma paixão que atravessa gerações. Tudo começou com minha mãe, uma talentosa artesã que transformava fios em verdadeiras obras de arte com suas mãos habilidosas. Foi com ela que aprendi a magia do crochê, cada ponto carregando histórias, carinho e tradição.
+
+        Hoje, esse projeto é uma forma de celebrar esse legado familiar, unindo o cuidado artesanal da minha mãe à tecnologia, para levar essas peças únicas até você. Cada produto é feito com amor e atenção aos detalhes, refletindo a beleza e o valor de algo feito à mão.
+
+        Aqui, acreditamos que o crochê é mais do que uma técnica: é uma herança, um símbolo de conexão e criatividade. Obrigado por fazer parte dessa história!</p>
     </section>
 
     <!-- Contato -->
@@ -67,5 +133,20 @@
     <footer>
         <p>&copy; 2024 {{ site_name }}. Todos os direitos reservados.</p>
     </footer>
+
+    <!-- Script Carrossel -->
+    <script>
+        const positions = {};
+
+        function moveSlide(produtoId, direction) {
+            const carousel = document.querySelector(`#carousel-${produtoId} .carousel-slide`);
+            const images = carousel.querySelectorAll("img");
+            if (!positions[produtoId]) positions[produtoId] = 0;
+
+            positions[produtoId] = (positions[produtoId] + direction + images.length) % images.length;
+            const offset = -positions[produtoId] * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+    </script>
 </body>
 </html>
