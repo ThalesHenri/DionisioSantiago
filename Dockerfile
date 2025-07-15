@@ -19,3 +19,6 @@ RUN python3 manage.py collectstatic --noinput
 
 # 6. Rodar o servidor
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8081"]
+
+
+#Teste de atualização do Dockerfile
