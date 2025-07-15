@@ -1,4 +1,4 @@
-name: "Build and Deploy Django App"
+name: "🚀 Build and Deploy"
 
 on:
   workflow_dispatch:
@@ -9,36 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Code Checkout"
+      - name: "📥 Code Checkout"
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
 
-      - name: "Define Image tag"
-        run: | 
-          if [[ "${{ github.ref }}" != refs/tags/*]]; then
-            echo "ERRO: deploy can only be triggered from a tag!"
+      - name: "🌍 Define Image Tag"
+        run: |
+          if [[ "${{ github.ref }}" != refs/tags/* ]]; then
+            echo "❌ ERRO: deploy can only be triggered from a tag!"
             exit 1
           fi
 
           IMAGE_TAG=${GITHUB_REF#refs/tags/}
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
-      
-      - name: "Configure AWS CLI"
-        uses: aws-actions/configure-aws-credentials@v3
+
+      - name: "🔑 Configure AWS CLI"
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      
-      - name: "Login AWS ECR"
-        run: |
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          aws-region: ${{ vars.AWS_REGION }}
 
-      - name: "Config Buildx"
+      - name: "🔑 Login AWS ECR"
+        run: |
+          aws ecr get-login-password --region ${{ vars.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com
+
+      - name: "🔧 Config Buildx"
         uses: docker/setup-buildx-action@v3
 
-      - name: "Docker Cache"
+      - name: "🐳 Docker Cache"
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
@@ -46,27 +46,27 @@ jobs:
           restore-keys: |
             docker-cache-
 
-      - name: " Build Docker image"
+      - name: "📦 Build Docker image"
         run: |
           docker buildx build \
-            --cache-from type=local,src=/tmp/.buildx-cache \
+            --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache \
             --load \
             -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG \
             -f Dockerfile .
-      
-      - name: "Push Docker image"
-        run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG 
 
-      - name: "Last Task Definition"
-        id: get-task 
+      - name: "☝🏾 Push image to ECR"
+        run: |
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG
+
+      - name: "📥 Last Task Definition"
+        id: get-task
         run: |
           aws ecs describe-task-definition --task-definition ${{ vars.ECS_TASK_DEFINITION }} --query "taskDefinition" --output json > task-definition.json
 
           jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' task-definition.json > cleaned-task-definition.json
-      
-      - name: " Update Task Definition"
+
+      - name: "✏️ Update Task Definition"
         id: update-task
         run: |
           NEW_IMAGE="${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}:$IMAGE_TAG"
@@ -76,7 +76,7 @@ jobs:
           NEW_REVISION=$(aws ecs register-task-definition --cli-input-json file://task-definition-updated.json --query "taskDefinition.revision" --output text)
 
           echo "NEW_REVISION=$NEW_REVISION" >> $GITHUB_ENV
-      
-      - name: "Update ECS"
+
+      - name: "🚀 Update ECS"
         run: |
           aws ecs update-service --cluster ${{ vars.ECS_CLUSTER }} --service ${{ vars.ECS_SERVICE }} --task-definition ${{ vars.ECS_TASK_DEFINITION }}:$NEW_REVISION
