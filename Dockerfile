@@ -3,7 +3,7 @@ FROM python:3.10-slim
 EXPOSE 8081
 
 # 1. Criar diretório e definir como diretório de trabalho
-WORKDIR /app
+WORKDIR /siteDjango
 
 # 2. Copiar os arquivos necessários
 COPY requirements.txt .
