@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-upui1_!6xz3&h-#=dsc21l4i5z32zak(*k+@j3pob$m#mwyzgw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["dionisiosantiago.ecosertao.com.br", "localhost"]
 
 
 # Application definition
@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main/')
+    os.path.join(BASE_DIR, 'main/static')
 ]
 
 # Default primary key field type
@@ -133,3 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'main.User'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://dionisiosantiago.ecosertao.com.br"
+]
